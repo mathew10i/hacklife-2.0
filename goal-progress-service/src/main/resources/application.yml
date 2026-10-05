@@ -1,0 +1,30 @@
+server:
+  port: ${SERVER_PORT:8083}
+
+spring:
+  application:
+    name: goal-progress-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5435/goal_progress_db}
+    username: ${DB_USERNAME:hacklife}
+    password: ${DB_PASSWORD:hacklife}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  jpa:
+    hibernate:
+      ddl-auto: validate
